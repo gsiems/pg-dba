@@ -25,18 +25,15 @@ First, identify a table to test. If this is a large table then it may be desirab
     CREATE TABLE test_base AS
         SELECT *
             FROM <schema_name>.<table_to_test>
-            WHERE row_number () < 1001 ;
+            LIMIT !000 ;
 
 Or:
 
     CREATE TABLE test_base AS
         SELECT *
-            FROM (
-                SELECT *
-                    FROM <schema_name>.<table_to_test>
-                    ORDER BY random ()
-                )
-            WHERE row_number () < 1001 ;
+            FROM <schema_name>.<table_to_test>
+                ORDER BY random ()
+            LIMIT !000 ;
 
 Next, run the following to generate the statement to create a re-ordered copy of the test_base table:
 
